@@ -31,5 +31,6 @@
             "TigerHeck\\Vcita\\": "src"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
