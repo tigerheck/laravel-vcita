@@ -1,0 +1,36 @@
+{
+    "name": "tigerheck/laravel-vcita",
+    "type": "library",
+    "license": "MIT",
+    "description": "Laravel wrapper for vCita APIs",
+    "keywords": [
+        "laravel",
+        "vcita"
+    ],
+    "authors": [
+        {
+            "name": "Chirag Goti",
+            "email": "gotichirag2011@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "laravel/framework": "^7.*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TigerHeck\\Vcita\\VcitaServiceProvider"
+            ],
+            "aliases": {
+                "Vcita": "TigerHeck\\Vcita\\VcitaFacade"
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "TigerHeck\\Vcita\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}
