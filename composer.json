@@ -14,8 +14,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "laravel/framework": "^7.*"
+        "php": "^8.0.2"
     },
     "extra": {
         "laravel": {
