@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class VcitaServiceProvider extends ServiceProvider
 {
+    protected $defer = true;
 
     public function boot()
     {
