@@ -4,6 +4,7 @@ namespace TigerHeck\Vcita;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Http;
+use TigerHeck\Vcita\Console\VcitaWebhookSubscribeCommand;
 
 class VcitaServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,7 @@ class VcitaServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerVcita();
+        $this->registerCommand();
     }
 
     public function provides()
@@ -35,5 +37,14 @@ class VcitaServiceProvider extends ServiceProvider
         $this->app->bind('vcita', function ($app) {
             return new VcitaService(config('vcita.base_url'), config('vcita.api_key'));
         });
+    }
+
+    protected function registerCommand()
+    {
+        $this->app->singleton('command.vcita:subscribe', function () {
+            return new VcitaWebhookSubscribeCommand;
+        });
+
+        $this->commands(['command.vcita:subscribe']);
     }
 }
