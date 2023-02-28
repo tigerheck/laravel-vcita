@@ -16,61 +16,39 @@ class VcitaService {
         $this->http = $this->http();
     }
 
-    function http(){
+    public function http(){
         return Http::withToken($this->token)->baseUrl($this->base_url);
     }
 
     public function getForms($access_by = null) {
-        $response = $this->http->get('/platform/v1/forms');
-
-        if($response->successful()) {
-            $data = $response->json($access_by);
-            return collect($data);
-        }
+        return self::responseCollection( $this->http->get('/platform/v1/forms'), $access_by);
     }
 
-    public function allClients($access_by = null) {
-        $response = $this->http->get('/platform/v1/clients');
-
-        if($response->successful()) {
-            $data = $response->json($access_by);
-            return collect($data);
-        }
+    public function allClients($input = [],$access_by = null) {
+        return self::responseCollection( $this->http->get('/platform/v1/clients', $input), $access_by);
     }
 
-    public function createClients($data,$access_by = null) {
-        $response = $this->http->post('/platform/v1/clients');
-
-        if($response->successful()) {
-            $data = $response->json($access_by);
-            return collect($data);
-        }
+    public function createClients($input,$access_by = null) {
+        return self::responseCollection( $this->http->post('/platform/v1/clients', $input), $access_by);
     }
 
-    public static function getClient($id, $access_by = null){
-        $response = $this->http()->get('/platform/v1/clients/'.$id);
-
-        if($response->successful()) {
-            $data = $response->json($access_by);
-            return collect($data);
-        }
+    public function getClient($id, $access_by = null){
+        return self::responseCollection( $this->http->get('/platform/v1/clients/'.$id), $access_by);
     }
 
-    public static function updateClient($id, $data, $access_by = null){
-        $response = $this->http()->put('/platform/v1/clients/'.$id, $data);
-
-        if($response->successful()) {
-            $data = $response->json($access_by);
-            return collect($data);
-        }
+    public function updateClient($id, $input, $access_by = null){
+        return self::responseCollection( $this->http->put('/platform/v1/clients/'.$id, $input), $access_by);
     }
 
-    public static function deleteClient($id, $access_by = null){
-        $response = $this->http()->delete('/platform/v1/clients/'.$id);
+    public function deleteClient($id, $access_by = null){
+        return self::responseCollection( $this->http->delete('/platform/v1/clients/'.$id), $access_by);
+    }
 
+    private function responseCollection($response, $access_by) {
         if($response->successful()) {
             $data = $response->json($access_by);
             return collect($data);
         }
+        return $response->json();
     }
 }
