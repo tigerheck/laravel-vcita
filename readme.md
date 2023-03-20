@@ -29,7 +29,7 @@ Add `VCITA_BASE_URL=` and `VCITA_API_KEY=` to your enviroment configuraiton file
 ## Usage
 See documention for params and others at [vCita docs](https://developers.vcita.com/reference)
 
-## Examples
+## Examples with \Http::vcita()
 
 Get clients
 ```
@@ -89,4 +89,74 @@ $response = \Http::vcita()->delete("/platform/v1/clients/{$client_id}");
 Retrieves a Client by Id
 ```
 $response = \Http::vcita()->get("/platform/v1/clients/{$client_id}");
+```
+
+## Examples with app("vcita")
+Support client api with this method, provide support for rest of api later on.  
+
+Get clients
+```
+$response = app("vcita")->allClients([
+    'search_term' => $email,
+    'search_by' => 'email',
+]);
+```
+Get clients (response with specific access point)
+```
+$response = app("vcita")->allClients([
+    'search_term' => $email,
+    'search_by' => 'email',
+], 'data.clients');
+```
+
+Create a Client
+```
+$response = app("vcita")->createClient([
+    'address'           => $address,
+    'custom_field1'     => $custom_field1,
+    'custom_field2'     => $custom_field2,
+    'custom_field3'     => $custom_field3,
+    'email'             => $email,
+    'first_name'        => $first_name,
+    'last_name'         => $last_name,
+    'phone'             => $phone,
+    'source_campaign'   => $source_campaign,
+    'source_channel'    => $source_channel,
+    'source_name'       => $source_name,
+    'source_url'        => $source_url,
+    'staff_id'          => $staff_id,
+    'status'            => $status,
+    'tags'              => $tags,
+]);
+```
+
+Updates a Client
+```
+$response = app("vcita")->updateClient($client_id, [
+    'address'           => $address,
+    'custom_field1'     => $custom_field1,
+    'custom_field2'     => $custom_field2,
+    'custom_field3'     => $custom_field3,
+    'email'             => $email,
+    'first_name'        => $first_name,
+    'last_name'         => $last_name,
+    'phone'             => $phone,
+    'source_campaign'   => $source_campaign,
+    'source_channel'    => $source_channel,
+    'source_name'       => $source_name,
+    'source_url'        => $source_url,
+    'staff_id'          => $staff_id,
+    'status'            => $status,
+    'tags'              => $tags,
+]);
+```
+
+Deletes a Client by Id
+```
+$response = app("vcita")->deleteClient($client_id);
+```
+
+Retrieves a Client by Id
+```
+$response = app("vcita")->getClient($client_id);
 ```
