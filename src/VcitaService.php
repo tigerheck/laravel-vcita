@@ -28,7 +28,7 @@ class VcitaService {
         return self::responseCollection( $this->http->get('/platform/v1/clients', $input), $access_by);
     }
 
-    public function createClients($input,$access_by = null) {
+    public function createClient($input,$access_by = null) {
         return self::responseCollection( $this->http->post('/platform/v1/clients', $input), $access_by);
     }
 
