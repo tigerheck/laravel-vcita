@@ -20,38 +20,38 @@ class VcitaService {
         return Http::withToken($this->token)->baseUrl($this->base_url);
     }
 
-    public function getForms($access_by = null) {
-        return self::responseCollection( $this->http->get('/platform/v1/forms'), $access_by);
+    public function getForms($access_by = null, $withCollection = true) {
+        return self::responseCollection( $this->http->get('/platform/v1/forms'), $access_by, $withCollection);
     }
 
-    public function allClients($input = [],$access_by = null) {
-        return self::responseCollection( $this->http->get('/platform/v1/clients', $input), $access_by);
+    public function allClients($input = [],$access_by = null, $withCollection = true) {
+        return self::responseCollection( $this->http->get('/platform/v1/clients', $input), $access_by, $withCollection);
     }
 
-    public function createClient($input,$access_by = null) {
-        return self::responseCollection( $this->http->post('/platform/v1/clients', $input), $access_by);
+    public function createClient($input,$access_by = null, $withCollection = true) {
+        return self::responseCollection( $this->http->post('/platform/v1/clients', $input), $access_by, $withCollection);
     }
 
-    public function getClient($id, $access_by = null){
-        return self::responseCollection( $this->http->get('/platform/v1/clients/'.$id), $access_by);
+    public function getClient($id, $access_by = null, $withCollection = true){
+        return self::responseCollection( $this->http->get('/platform/v1/clients/'.$id), $access_by, $withCollection);
     }
 
-    public function updateClient($id, $input, $access_by = null){
-        return self::responseCollection( $this->http->put('/platform/v1/clients/'.$id, $input), $access_by);
+    public function updateClient($id, $input, $access_by = null, $withCollection = true){
+        return self::responseCollection( $this->http->put('/platform/v1/clients/'.$id, $input), $access_by, $withCollection);
     }
 
-    public function deleteClient($id, $access_by = null){
-        return self::responseCollection( $this->http->delete('/platform/v1/clients/'.$id), $access_by);
+    public function deleteClient($id, $access_by = null, $withCollection = true){
+        return self::responseCollection( $this->http->delete('/platform/v1/clients/'.$id), $access_by, $withCollection);
     }
 
-    public function getClientMatter($id, $access_by = null){
-        return self::responseCollection( $this->http->get('/business/clients/v1/matters/'.$id), $access_by);
+    public function getClientMatter($id, $access_by = null, $withCollection = true){
+        return self::responseCollection( $this->http->get('/business/clients/v1/matters/'.$id), $access_by, $withCollection);
     }
 
-    private function responseCollection($response, $access_by) {
+    private function responseCollection($response, $access_by, $withCollection = true ) {
         if($response->successful()) {
             $data = $response->json($access_by);
-            return collect($data);
+            return $withCollection ? collect($data) : $data;
         }
         return $response->json();
     }
