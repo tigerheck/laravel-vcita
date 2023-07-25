@@ -44,6 +44,10 @@ class VcitaService {
         return self::responseCollection( $this->http->delete('/platform/v1/clients/'.$id), $access_by);
     }
 
+    public function getClientMatter($id, $access_by = null){
+        return self::responseCollection( $this->http->get('/business/clients/v1/matters/'.$id), $access_by);
+    }
+
     private function responseCollection($response, $access_by) {
         if($response->successful()) {
             $data = $response->json($access_by);
