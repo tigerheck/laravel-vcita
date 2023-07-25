@@ -48,6 +48,10 @@ class VcitaService {
         return self::responseCollection( $this->http->get('/business/clients/v1/matters/'.$id), $access_by, $withCollection);
     }
 
+    public function getFields($id, $access_by = null, $withCollection = true){
+        return self::responseCollection( $this->http->get('/platform/v1/fields/'.$id), $access_by, $withCollection);
+    }
+
     private function responseCollection($response, $access_by, $withCollection = true ) {
         if($response->successful()) {
             $data = $response->json($access_by);
