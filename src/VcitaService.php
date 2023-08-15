@@ -52,6 +52,10 @@ class VcitaService {
         return self::responseCollection( $this->http->get('/platform/v1/fields'), $access_by, $withCollection);
     }
 
+    public function getBusinesses($input, $access_by = null, $withCollection = true) {
+        return self::responseCollection( $this->http->get("/platform/v1/businesses", $input), $access_by, $withCollection);
+    }
+
     public function allBusinesseStaffs($businesse_id, $input = [],$access_by = null, $withCollection = true) {
         return self::responseCollection( $this->http->get("/platform/v1/businesses/{$businesse_id}/staffs", $input), $access_by, $withCollection);
     }
