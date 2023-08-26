@@ -60,6 +60,10 @@ class VcitaService {
         return self::responseCollection( $this->http->get("/platform/v1/businesses/{$businesse_id}/staffs", $input), $access_by, $withCollection);
     }
 
+    public function allServices($input = [],$access_by = null, $withCollection = true) {
+        return self::responseCollection( $this->http->get("/platform/v1/services", $input), $access_by, $withCollection);
+    }
+
     private function responseCollection($response, $access_by, $withCollection = true ) {
         if($response->successful()) {
             $data = $response->json($access_by);
