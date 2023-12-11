@@ -65,7 +65,7 @@ class VcitaService {
     }
 
     public function schedulingBookings($input = [],$access_by = null, $withCollection = true) {
-        return self::responseCollection( $this->http->post("/platform/v1/scheduling/bookings", $input), $access_by, $withCollection);
+        return self::responseCollection( $this->http->asForm()->post("/platform/v1/scheduling/bookings", $input), $access_by, $withCollection);
     }
 
     private function responseCollection($response, $access_by, $withCollection = true ) {
