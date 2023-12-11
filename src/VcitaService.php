@@ -64,6 +64,10 @@ class VcitaService {
         return self::responseCollection( $this->http->get("/platform/v1/services", $input), $access_by, $withCollection);
     }
 
+    public function schedulingBookings($input = [],$access_by = null, $withCollection = true) {
+        return self::responseCollection( $this->http->post("/platform/v1/scheduling/bookings", $input), $access_by, $withCollection);
+    }
+
     private function responseCollection($response, $access_by, $withCollection = true ) {
         if($response->successful()) {
             $data = $response->json($access_by);
